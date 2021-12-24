@@ -23,4 +23,10 @@ class Bond extends Model
         if($this->attributes['interest_accrual_period'] ==365 )
             return  12 / $this->attributes['coupon_payment_frequency'];
     }
+
+    public function getPercentAttribute(){
+        return
+            $this->attributes['nominal_price'] / 100 *
+            $this->attributes['coupon_rate']  / $this->attributes['interest_accrual_period'];
+    }
 }

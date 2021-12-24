@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrderRequest;
+use App\Models\Bond;
 use App\Models\Order;
+use App\Repositories\BondRepository;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 class OrderController extends Controller
 {
+    /**
+     * @var BondRepository
+     */
+    private $bondRepository;
+
+    public function __construct(BondRepository $bondRepository)
+    {
+        $this->bondRepository = $bondRepository;
+    }
     /**
      * creating a new order.
      *
@@ -25,5 +37,16 @@ class OrderController extends Controller
         ]);
         return response()->json( $data );
 
+    }
+
+
+
+    public function interestPayments($order_id, Request $request){
+        $order = $this->bondRepository->getOrder($order_id);
+        $payouts = $this->bondRepository->getPayouts($order->bond_id);
+        $percent = $this->bondRepository->getPercent($order->bond_id);
+        $payments = $this->bondRepository
+            ->accumulatedInterest($payouts,$percent,$order->bonds_purchased,$order->order_date);
+        return response()->json($payments);
     }
 }

@@ -21,5 +21,6 @@ Route::resource('/bord', 'App\Http\Controllers\BordController');
 
 Route::get('/bord/{id}/payouts', 'App\Http\Controllers\BordController@payouts')
     ->name('bord.payouts');
-Route::get('/bord/{id}/order', 'App\Http\Controllers\OrderController@create')
+Route::post('/bord/{id}/order', 'App\Http\Controllers\OrderController@create')
     ->name('bord.order');
+Route::post('/bond/order/{order_id}', 'App\Http\Controllers\OrderController@interestPayments');
