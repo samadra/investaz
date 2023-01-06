@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test', function () {
+    return view('welcome');
+});
 Route::resource('/bord', 'App\Http\Controllers\BordController');
 
 Route::get('/bord/{id}/payouts', 'App\Http\Controllers\BordController@payouts')
