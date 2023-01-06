@@ -20,6 +20,8 @@ jobs:
     - uses: php-actions/phpunit@v3
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: to give permission
+      run: sudo chown -R $USER ~/.composer/
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
     - name: Generate key
