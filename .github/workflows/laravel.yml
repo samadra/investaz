@@ -23,7 +23,7 @@ jobs:
     - name: to give permission
       run: sudo chown -R $USER ~/.composer/
     - name: Directory Permissions
-      run: chmod -R 777 storage bootstrap/cache /home/runner/work/investaz/investaz/vendor/composer/installed.php
+      run: sudo chmod -R 777 storage bootstrap/cache /home/runner/work/investaz/investaz/vendor/composer/installed.php
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
     - name: Generate key
